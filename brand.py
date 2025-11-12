@@ -8,6 +8,8 @@ import os
 from openai import OpenAI
 from urllib.parse import urlparse
 import urllib3
+st.write("✅ Secret loaded" if "OPENAI_API_KEY" in st.secrets else "❌ Secret missing")
+
 
 # Disable SSL warnings
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
