@@ -15,8 +15,8 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 st.set_page_config(page_title="AI Brand Analyzer", page_icon="🔍", layout="wide")
 
 class BrandAnalyzer:
-    def __init__(self, api_key):
-        self.client = OpenAI(api_key=api_key)
+    def __init__(self, client):
+        self.client = client
         self.session = requests.Session()
         self.session.headers.update({
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -132,7 +132,7 @@ Make educated guesses about their brand style based on:
             
             # Call OpenAI
             response = self.client.chat.completions.create(
-                model="gpt-4o",
+                model="gpt-4o-mini",
                 messages=[
                     {"role": "system", "content": "You are a brand analyst. Create professional brand descriptions based on available information. Return only valid JSON."},
                     {"role": "user", "content": prompt}
@@ -178,7 +178,7 @@ Focus on visual and design elements. Write the brand_description as a natural pa
             
             # Call OpenAI
             response = self.client.chat.completions.create(
-                model="gpt-4o",
+                model="gpt-4o-mini",
                 messages=[
                     {"role": "system", "content": "You are a brand analyst. Return only valid JSON with flowing brand descriptions."},
                     {"role": "user", "content": prompt}
@@ -238,16 +238,16 @@ def main():
     st.title("AI Brand Analyzer")
     st.write("Upload a CSV/Excel file or analyze individual brands")
     
-    # API Key from Streamlit secrets
-    api_key = st.secrets["OPENAI_API_KEY"]
+    # Initialize OpenAI client
+    client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
     
     # Initialize analyzer
-    analyzer = BrandAnalyzer(api_key)
+    analyzer = BrandAnalyzer(client)
     
     # Test API connection
     try:
-        test = analyzer.client.chat.completions.create(
-            model="gpt-4o",
+        test = client.chat.completions.create(
+            model="gpt-4o-mini",
             messages=[{"role": "user", "content": "test"}],
             max_tokens=5
         )
