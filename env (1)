@@ -1,0 +1,18 @@
+# OpenAI API Configuration (Primary)
+OPENAI_API_KEY=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
+
+# Claude API (Backup option)
+ANTHROPIC_API_KEY=your_claude_api_key_here
+
+# Instagram API
+INSTAGRAM_ACCESS_TOKEN=your_instagram_access_token_here
+
+# Database Configuration
+MASTER_BRANDS_CSV=temp 16.csv
+# Scraping Configuration
+MAX_REQUESTS_PER_MINUTE=60
+USER_AGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+
+# Application Settings
+DEBUG=True
+LOG_LEVEL=INFO
