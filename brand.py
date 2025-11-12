@@ -238,8 +238,8 @@ def main():
     st.title("AI Brand Analyzer")
     st.write("Upload a CSV/Excel file or analyze individual brands")
     
-    # API Key - Hardcoded
-    api_key = "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"
+    # API Key from Streamlit secrets
+    api_key = st.secrets["OPENAI_API_KEY"]
     
     # Initialize analyzer
     analyzer = BrandAnalyzer(api_key)
